@@ -35,11 +35,11 @@ namespace OpenGL_Projection
 
            
             float[][] Roof = {
-                              new float []{ 1.0f, 3.0f,  1.0f}, // Peak
-                              new float []{-1.0f, 2.0f,  3.0f},
-                              new float []{ 3.0f, 2.0f,  3.0f},
-                              new float []{ 3.0f, 2.0f, -1.0f},
-                              new float []{-1.0f, 2.0f, -1.0f}};
+                              new float []{ 1.0f, 3.5f,  1.0f}, // Peak
+                              new float []{-0.5f, 2.0f,  2.5f},
+                              new float []{ 2.5f, 2.0f,  2.5f},
+                              new float []{ 2.5f, 2.0f, -0.5f},
+                              new float []{-0.5f, 2.0f, -0.5f}};
 
             using (var game = new GameWindow())
             {
