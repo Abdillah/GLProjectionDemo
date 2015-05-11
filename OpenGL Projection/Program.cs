@@ -19,18 +19,28 @@ namespace OpenGL_Projection
         [STAThread]
         static void Main()
         {
+
             //variabel Wall yang bertipe array 3D float
             float[][] Wall = {
+                           // Front
                            new float[] {0.0f, 0.0f, 0.0f},
 						   new float[] {2.0f, 0.0f, 0.0f},
 						   new float[] {2.0f, 2.0f, 0.0f},
 						   new float[] {0.0f, 2.0f, 0.0f},
+                           // Rear
 						   new float[] {0.0f, 0.0f, 2.0f},
 						   new float[] {2.0f, 0.0f, 2.0f},
 						   new float[] {2.0f, 2.0f, 2.0f},
 						   new float[] {0.0f, 2.0f, 2.0f},};
 
            
+            float[][] Roof = {
+                              new float []{ 1.0f, 3.0f,  1.0f}, // Peak
+                              new float []{-1.0f, 2.0f,  3.0f},
+                              new float []{ 3.0f, 2.0f,  3.0f},
+                              new float []{ 3.0f, 2.0f, -1.0f},
+                              new float []{-1.0f, 2.0f, -1.0f}};
+
             using (var game = new GameWindow())
             {
                 game.Width = 800;
@@ -94,18 +104,33 @@ namespace OpenGL_Projection
                     //Now we draw something fancy... a quad
                     //before that we have to set the coords they are currently (0, 0, 0) and are object
                     //will not be visible to us.
-                    GL.Translate(-3f, -3f, -10);
 
+                    GL.Translate(-3f, -3f, -10);
 					
-                    //Draw
+                    //Draw Roof
+                    GL.Begin(PrimitiveType.Triangles);
+                    GL.Color3(Color.Yellow);
+                    GL.Vertex3(Roof[0]);
+                    GL.Vertex3(Roof[1]);
+                    GL.Vertex3(Roof[4]);
+                    GL.End();
+
+                    GL.Begin(PrimitiveType.Triangles);
+                    GL.Color3(Color.Blue);
+                    GL.Vertex3(Roof[0]);
+                    GL.Vertex3(Roof[3]);
+                    GL.Vertex3(Roof[4]);
+                    GL.End();
+
+                    // Wall part
                     GL.Begin(PrimitiveType.Quads);
-                    GL.Color3(Color.Red);
+                    GL.Color3(Color.Aqua);
                     GL.Vertex3(Wall[0]);
                     GL.Vertex3(Wall[1]);
                     GL.Vertex3(Wall[2]);
                     GL.Vertex3(Wall[3]);
                     GL.End();
-															
+									
 					GL.Begin(PrimitiveType.Quads);
                     GL.Color3(Color.Green);
                     GL.Vertex3(Wall[4]);
@@ -138,6 +163,20 @@ namespace OpenGL_Projection
                     GL.Vertex3(Wall[7]);
                     GL.End();
 
+                    // Roof overdraw
+                    GL.Begin(PrimitiveType.Triangles);
+                    GL.Color3(Color.Red);
+                    GL.Vertex3(Roof[0]);
+                    GL.Vertex3(Roof[2]);
+                    GL.Vertex3(Roof[1]);
+                    GL.End();
+
+                    GL.Begin(PrimitiveType.Triangles);
+                    GL.Color3(Color.White);
+                    GL.Vertex3(Roof[0]);
+                    GL.Vertex3(Roof[2]);
+                    GL.Vertex3(Roof[3]);
+                    GL.End();
 
 					game.SwapBuffers();
 
