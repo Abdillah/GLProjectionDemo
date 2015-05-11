@@ -181,21 +181,6 @@ namespace OpenGL_Projection
 					game.SwapBuffers();
 
                     return;
-                    GL.Begin(PrimitiveType.Quads);
-                    GL.Color3(Color.Red);
-                    GL.Vertex3(20.0f, 20.0f, 0.0f);
-                    GL.Vertex3(400.0f, 20.0f, 0.0f);
-                    GL.Vertex3(400.0f, 400.0f, 0.0f);
-                    GL.Vertex3(20.0f, 400.0f, 0.0f);
-                    GL.End();
-
-                    GL.Begin(PrimitiveType.Quads);
-                    GL.Color3(Color.Blue);
-                    GL.Vertex3(20.0f, 20.0f, 10.0f);
-                    GL.Vertex3(400.0f, 20.0f, 10.0f);
-                    GL.Vertex3(400.0f, 300.0f, 10.0f);
-                    GL.Vertex3(20.0f, 400.0f, 10.0f);
-                    GL.End();
                 };
  
                 // Run the game at 60 updates per second
