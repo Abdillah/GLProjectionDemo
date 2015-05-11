@@ -19,6 +19,18 @@ namespace OpenGL_Projection
         [STAThread]
         static void Main()
         {
+            //variabel Wall yang bertipe array 3D float
+            float[][] Wall = {
+                           new float[] {0.0f, 0.0f, 0.0f},
+						   new float[] {2.0f, 0.0f, 0.0f},
+						   new float[] {2.0f, 2.0f, 0.0f},
+						   new float[] {0.0f, 2.0f, 0.0f},
+						   new float[] {0.0f, 0.0f, 2.0f},
+						   new float[] {2.0f, 0.0f, 2.0f},
+						   new float[] {2.0f, 2.0f, 2.0f},
+						   new float[] {0.0f, 2.0f, 2.0f},};
+
+           
             using (var game = new GameWindow())
             {
                 game.Width = 800;
@@ -52,6 +64,7 @@ namespace OpenGL_Projection
                     //Then we tell GL to use are matrix as the new Projection matrix.
                     GL.MatrixMode(MatrixMode.Projection);
                     GL.LoadMatrix(ref perspective_matrix);
+					
 
                     Matrix4 lookat = Matrix4.LookAt(0, 0, 0, 0, 0, 0, 0, 1, 0);
 
@@ -81,18 +94,52 @@ namespace OpenGL_Projection
                     //Now we draw something fancy... a quad
                     //before that we have to set the coords they are currently (0, 0, 0) and are object
                     //will not be visible to us.
-                    GL.Translate(-2f, -1f, -5);
+                    GL.Translate(-3f, -3f, -10);
 
+					
                     //Draw
                     GL.Begin(PrimitiveType.Quads);
                     GL.Color3(Color.Red);
-                    GL.Vertex3(0.0f, 0.0f, 0.0f);
-                    GL.Vertex3(1.0f, 0.0f, 0.0f);
-                    GL.Vertex3(1.0f, 1.0f, 0.0f);
-                    GL.Vertex3(0.0f, 1.0f, 0.0f);
+                    GL.Vertex3(Wall[0]);
+                    GL.Vertex3(Wall[1]);
+                    GL.Vertex3(Wall[2]);
+                    GL.Vertex3(Wall[3]);
                     GL.End();
- 
-                    game.SwapBuffers();
+															
+					GL.Begin(PrimitiveType.Quads);
+                    GL.Color3(Color.Green);
+                    GL.Vertex3(Wall[4]);
+                    GL.Vertex3(Wall[5]);
+                    GL.Vertex3(Wall[1]);
+                    GL.Vertex3(Wall[0]);
+                    GL.End();
+					
+					GL.Begin(PrimitiveType.Quads);
+                    GL.Color3(Color.Blue);
+                    GL.Vertex3(Wall[5]);
+                    GL.Vertex3(Wall[1]);
+                    GL.Vertex3(Wall[2]);
+                    GL.Vertex3(Wall[6]);
+                    GL.End();
+					
+					GL.Begin(PrimitiveType.Quads);
+                    GL.Color3(Color.Red);
+                    GL.Vertex3(Wall[4]);
+                    GL.Vertex3(Wall[0]);
+                    GL.Vertex3(Wall[3]);
+                    GL.Vertex3(Wall[7]);
+                    GL.End();
+
+                    GL.Begin(PrimitiveType.Quads);
+                    GL.Color3(Color.Yellow);
+                    GL.Vertex3(Wall[4]);
+                    GL.Vertex3(Wall[5]);
+                    GL.Vertex3(Wall[6]);
+                    GL.Vertex3(Wall[7]);
+                    GL.End();
+
+
+					game.SwapBuffers();
 
                     return;
                     GL.Begin(PrimitiveType.Quads);
