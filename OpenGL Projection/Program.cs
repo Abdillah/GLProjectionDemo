@@ -71,11 +71,13 @@ namespace OpenGL_Projection
                     OpenTK.Matrix4 perspective_matrix =
                        OpenTK.Matrix4.CreatePerspectiveFieldOfView(fov, (float)aspect_ratio, near_distance, far_distance);
 
+                    OpenTK.Matrix4 orthographic_matrix =
+                       OpenTK.Matrix4.CreateOrthographic(12, 9, near_distance, far_distance);
+                    
                     //Then we tell GL to use are matrix as the new Projection matrix.
                     GL.MatrixMode(MatrixMode.Projection);
-                    GL.LoadMatrix(ref perspective_matrix);
+                    GL.LoadMatrix(ref orthographic_matrix);
 					
-
                     Matrix4 lookat = Matrix4.LookAt(0, 0, 0, 0, 0, 0, 0, 1, 0);
 
                     GL.MatrixMode(MatrixMode.Modelview);
@@ -106,7 +108,8 @@ namespace OpenGL_Projection
                     //will not be visible to us.
 
                     GL.Translate(-3f, -3f, -10);
-					
+                    GL.Rotate(-10, new Vector3d(-1, 1, -0.015));
+
                     //Draw Roof
                     GL.Begin(PrimitiveType.Triangles);
                     GL.Color3(Color.Yellow);
