@@ -19,6 +19,13 @@ namespace OpenGL_Projection
         [STAThread]
         static void Main()
         {
+            float[][] Roof = {
+                              new float []{1.0f,3.0f,1.0f},
+                              new float []{-1.0f,2.0f,-1.0f},
+                              new float []{3.0f,2.0f,3.0f},
+                              new float []{3.0f,2.0f,1.0f},
+                              new float []{-1.0f,2.0f,-1.0f}};
+
             using (var game = new GameWindow())
             {
                 game.Width = 800;
@@ -81,15 +88,35 @@ namespace OpenGL_Projection
                     //Now we draw something fancy... a quad
                     //before that we have to set the coords they are currently (0, 0, 0) and are object
                     //will not be visible to us.
-                    GL.Translate(-2f, -1f, -5);
+                    GL.Translate(-2f, -1f, -10);
 
                     //Draw
-                    GL.Begin(PrimitiveType.Quads);
+                    GL.Begin(PrimitiveType.Triangles);
                     GL.Color3(Color.Red);
-                    GL.Vertex3(0.0f, 0.0f, 0.0f);
-                    GL.Vertex3(1.0f, 0.0f, 0.0f);
-                    GL.Vertex3(1.0f, 1.0f, 0.0f);
-                    GL.Vertex3(0.0f, 1.0f, 0.0f);
+                    GL.Vertex3(Roof[0]);
+                    GL.Vertex3(Roof[1]);
+                    GL.Vertex3(Roof[2]);
+                    GL.End();
+
+                    GL.Begin(PrimitiveType.Triangles);
+                    GL.Color3(Color.Yellow);
+                    GL.Vertex3(Roof[0]);
+                    GL.Vertex3(Roof[1]);
+                    GL.Vertex3(Roof[4]);
+                    GL.End();
+
+                    GL.Begin(PrimitiveType.Triangles);
+                    GL.Color3(Color.Blue);
+                    GL.Vertex3(Roof[0]);
+                    GL.Vertex3(Roof[3]);
+                    GL.Vertex3(Roof[4]);
+                    GL.End();
+
+                    GL.Begin(PrimitiveType.Triangles);
+                    GL.Color3(Color.White);
+                    GL.Vertex3(Roof[0]);
+                    GL.Vertex3(Roof[2]);
+                    GL.Vertex3(Roof[3]);
                     GL.End();
  
                     game.SwapBuffers();
